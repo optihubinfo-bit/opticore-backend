@@ -7,6 +7,7 @@ import { productsRouter } from './routes/products.js';
 import { invoicesRouter } from './routes/invoices.js';
 import { appointmentsRouter } from './routes/appointments.js';
 import { labJobsRouter } from './routes/labJobs.js';
+import { transfersRouter } from './routes/transfers.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/products', productsRouter);
 app.use('/api/invoices', invoicesRouter);
 app.use('/api/appointments', appointmentsRouter);
 app.use('/api/lab-jobs', labJobsRouter);
+app.use('/api/transfers', transfersRouter);
 
 app.listen(env.port, () => {
   console.log(`OptiCore backend listening on port ${env.port}`);
