@@ -8,7 +8,10 @@ export async function getInvoices(req: Request, res: Response) {
   try {
     const search = typeof req.query.q === 'string' ? req.query.q : undefined;
     const patientId = typeof req.query.patient_id === 'string' ? req.query.patient_id : undefined;
-    const data = await listInvoices(supabase, { search, patientId });
+    const storeId = typeof req.query.store_id === 'string' ? req.query.store_id : undefined;
+    const from = typeof req.query.from === 'string' ? req.query.from : undefined;
+    const to = typeof req.query.to === 'string' ? req.query.to : undefined;
+    const data = await listInvoices(supabase, { search, patientId, storeId, from, to });
     res.json(data);
   } catch (error: any) {
     res.status(statusForError(error)).json({ error: error.message });

@@ -22,7 +22,7 @@ function sanitizeSearchTerm(term: string): string {
 
 export async function listInvoices(
   supabase: SupabaseClient,
-  options: { search?: string; patientId?: string }
+  options: { search?: string; patientId?: string; storeId?: string; from?: string; to?: string }
 ) {
   let query = supabase
     .from('invoices')
@@ -31,6 +31,15 @@ export async function listInvoices(
 
   if (options.patientId) {
     query = query.eq('patient_id', options.patientId);
+  }
+  if (options.storeId) {
+    query = query.eq('store_id', options.storeId);
+  }
+  if (options.from) {
+    query = query.gte('created_at', options.from);
+  }
+  if (options.to) {
+    query = query.lt('created_at', options.to);
   }
 
   if (options.search) {
